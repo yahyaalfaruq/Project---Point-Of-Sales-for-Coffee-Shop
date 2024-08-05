@@ -1,0 +1,244 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+.container {
+  width: 70%;
+  background-color: rgb(214, 214, 214);
+  padding: 0px 20px;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.search-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  font-size: 20px;
+  color: #888;
+}
+
+.search {
+  padding: 10px 10px 10px 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.ri-filter-line {
+  font-size: 24px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.btn > button {
+  padding: 8px 40px;
+  border: none;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.btn > button:hover {
+  background-color: #ff731c;
+  color: white;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  overflow-y: scroll;
+  max-height: 100vh;
+}
+
+.product-container div p strong {
+  color: #ff731c;
+}
+
+.product {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 28%;
+  padding: 10px;
+  text-align: left;
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+}
+
+.product img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.product p {
+  margin: 10px 0;
+}
+
+.product-content {
+  flex-grow: 1;
+}
+
+.product-footer {
+  margin-top: auto;
+}
+
+.product > button {
+  background-color: #ff731c;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  padding: 8px;
+}
+
+.product > button:hover {
+  border: 1px solid black;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.conter {
+  padding-right: 10px;
+}
+
+.conter .order {
+  margin-bottom: 30px;
+}
+
+.conter .order div {
+  display: flex;
+  row-gap: 20px;
+}
+
+.conter .order div .teks {
+  display: flex;
+}
+
+.conter .order div img {
+  border-radius: 8px;
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.button.plus {
+  background-color: #ffd39b;
+  border-radius: 5px 0 0 5px;
+}
+
+.button.minus {
+  background-color: #ff8c42;
+  border-radius: 0 5px 5px 0;
+}
+
+.subtotal {
+  background-color: rgb(214, 214, 214);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.subtotal > h3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+hr {
+  border-top: 1px dashed black;
+}
+
+.current {
+  display: flex;
+  flex-direction: column;
+}
+
+.current-item {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.current-item .teks-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.current-item .teks-title .teks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.current-item .teks-title .teks > p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.current-item .teks-title .teks .button- > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  margin: 0px;
+}
+
+.current-item .teks-title .teks > p, .button- {
+  width: 45%;
+}
+
+.current-item .teks-title > h3 {
+  padding: 0px;
+  margin: 0px;
+}
+
+.current-item .image {
+  width: 20%;
+  background-color: aliceblue;
+}
+
+.current-item .image > img {
+  width: 100%;
+}

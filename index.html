@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <title>Coffee Shop</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div
+      class="conter"
+      style="width: 25%; position: fixed; right: 0px; max-height: 100vh"
+    >
+      <h1>Current Order</h1>
+      <div class="order" id="order">
+        <div class="current" id="current"></div>
+      </div>
+      <div class="subtotal" id="subtotal">
+        <hr />
+        <h3>
+          Total:
+          <span id="totalHarga" class="totalHarga">$10.02</span>
+        </h3>
+      </div>
+    </div>
+    <div class="container">
+      <header>
+        <div class="header-teks">
+          <h1>Welcome, Gorry</h1>
+          <p>Discover whatever you need easily</p>
+        </div>
+        <div class="header-search">
+          <label for="search" class="search-label">
+            <i class="ri-search-line search-icon"></i>
+            <input
+              type="search"
+              class="search"
+              id="search"
+              placeholder="Search product"
+            />
+          </label>
+          <i class="ri-filter-line"></i>
+        </div>
+      </header>
+      <div class="button">
+        <div class="btn">
+          <button>Signature</button>
+        </div>
+        <div class="btn">
+          <button>Croissant</button>
+        </div>
+        <div class="btn">
+          <button>Waffle</button>
+        </div>
+        <div class="btn">
+          <button>Coffee</button>
+        </div>
+        <div class="btn">
+          <button>Ice cream</button>
+        </div>
+      </div>
+      <div class="product-container" id="product-container"></div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const URL = "./data.json";
+        const productContainer = document.getElementById("product-container");
+        fetch(URL)
+          .then((response) => response.json())
+          .then((data) => {
+            const products = data.products;
+            saveProductsToLocalStorage(products);
+            productContainer.innerHTML = getProduct(products);
+          });
+
+        const getProduct = (products) => {
+          return products
+            .map(
+              (product) =>
+                `
+          <div class="product" id="product" key=${product.id}>
+          <img
+            src="${product.img}"
+            alt="${product.title}" id="img"
+          />
+          <h3 id="title-product">${product.title}</h3>
+          <span id="description">${product.description}</span>
+          <p>Rp<strong id="price">${product.price}</strong></p>
+          <button class="btn-small" onclick="addToOrder(${product.id})">Add</button>
+        </div>
+          `
+            )
+            .join("");
+        };
+      });
+
+      function addToOrder(id) {
+        const carts = getCartsFromLocalStorage();
+        const products = getProductsFromLocalStorage();
+        // console.log(products);
+        const productSelected = products.find((product) => product.id == id);
+        // console.log(productSelected);
+        const plus = document.getElementById("plus");
+        const minus = document.getElementById("minus");
+        const quantity = document.getElementById("quantity");
+        let counter = 0; 
+        carts.push({
+          id: id,
+          title: productSelected.title,
+          price: productSelected.price,
+          counter: counter,
+        });
+        console.log(quantity);
+        plus.addEventListener("click", () => {
+          counter + 1;
+        });
+        console.log(counter);
+        saveCartsToLocalStorage(carts);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const carts = getCartsFromLocalStorage();
+        console.log(carts);
+        const current = document.getElementById("current");
+        current.innerHTML = getCarts();
+        function getCarts() {
+          return carts
+            .map(
+              (product) => `
+              <div class="current-item">
+                <div class="image">
+                     <img src="${product.img}"  alt="${product.title}" id="img" />
+                </div>
+                <div class="teks-title">
+                     <h3 id="title-product">${product.title}</h3>
+                     <div class="teks">
+                         <p>Rp<strong id="price">${product.price}</strong></p>
+                           <div class="button-">
+                <button id="plus" class="button plus">+</button>
+                <div id="counter" class="counter">${product.counter}</div>
+                <button id="minus" class="button minus">-</button>
+              </div>
+                     </div>
+                </div>
+              </div>`
+            )
+            .join("");
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const carts = getCartsFromLocalStorage();
+        const counter = document.getElementById("counter").value;
+        const totalHarga = document.getElementById("totalHarga");
+      });
+
+      function saveCartsToLocalStorage(arg) {
+        localStorage.setItem("carts", JSON.stringify(arg));
+      }
+
+      function getCartsFromLocalStorage() {
+        const cartsJSON = localStorage.getItem("carts");
+        return cartsJSON ? JSON.parse(cartsJSON) : [];
+      }
+
+      function getProductsFromLocalStorage() {
+        const productJSON = localStorage.getItem("products");
+        return productJSON ? JSON.parse(productJSON) : [];
+      }
+
+      function saveProductsToLocalStorage(arg) {
+        localStorage.setItem("products", JSON.stringify(arg));
+      }
+    </script>
+  </body>
+</html>
