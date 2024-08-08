@@ -33,14 +33,14 @@
       "title": "Sweet Chocolate Chocochips Croissant",
       "description": "Plain croissant with smoke tenderloin beef sliced and vegetable",
       "price": "22000",
-      "img": "./asset/chocolate-croissants-2-300x450.webp"
+      "img": "./asset/IMG_0792.webp"
     },
     {
       "id": 6,
       "title": "Basic Croissant La Ta Dhore",
       "description": "Plain croissant with smoke tenderloin beef sliced and vegetable",
       "price": "8000",
-      "img": "./asset/chocolate-croissants-2-300x450.webp"
+      "img": "./asset/Croissants-20.webp"
     }
   ]
 }

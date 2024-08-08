@@ -15,16 +15,19 @@
       class="conter"
       style="width: 25%; position: fixed; right: 0px; max-height: 100vh"
     >
-      <h1>Current Order</h1>
+      <h2>Current Order</h2>
       <div class="order" id="order">
         <div class="current" id="current"></div>
       </div>
       <div class="subtotal" id="subtotal">
         <hr />
-        <h3>
+        <h3 id="total">
           Total:
-          <span id="totalHarga" class="totalHarga">$10.02</span>
+          <span id="totalHarga" class="totalHarga"></span>
         </h3>
+      </div>
+      <div class="payment">
+        <button>Continue To Payment</button>
       </div>
     </div>
     <div class="container">
@@ -48,19 +51,19 @@
       </header>
       <div class="button">
         <div class="btn">
-          <button>Signature</button>
+          <button><i class="ri-shining-2-line"></i> Signature</button>
         </div>
         <div class="btn">
-          <button>Croissant</button>
+          <button><i class="ri-cake-2-line"></i> Croissant</button>
         </div>
         <div class="btn">
-          <button>Waffle</button>
+          <button><i class="ri-bread-line"></i> Waffle</button>
         </div>
         <div class="btn">
-          <button>Coffee</button>
+          <button><i class="ri-cup-line"></i> Coffee</button>
         </div>
         <div class="btn">
-          <button>Ice cream</button>
+          <button><i class="ri-cake-3-line"></i> Ice cream</button>
         </div>
       </div>
       <div class="product-container" id="product-container"></div>
@@ -96,37 +99,71 @@
             )
             .join("");
         };
+        const carts = getCartsFromLocalStorage();
+        cartsCurrent(carts);
       });
 
       function addToOrder(id) {
         const carts = getCartsFromLocalStorage();
         const products = getProductsFromLocalStorage();
-        // console.log(products);
         const productSelected = products.find((product) => product.id == id);
-        // console.log(productSelected);
-        const plus = document.getElementById("plus");
-        const minus = document.getElementById("minus");
-        const quantity = document.getElementById("quantity");
-        let counter = 0; 
-        carts.push({
-          id: id,
-          title: productSelected.title,
-          price: productSelected.price,
-          counter: counter,
-        });
-        console.log(quantity);
-        plus.addEventListener("click", () => {
-          counter + 1;
-        });
-        console.log(counter);
+        const existingProduct = carts.some((product) => product.id == id);
+        const findProduct = carts.find((product) => product.id == id);
+        console.log(existingProduct);
+        if (existingProduct) {
+          findProduct.counter++;
+        } else {
+          carts.push({
+            id: id,
+            title: productSelected.title,
+            price: productSelected.price,
+            img: productSelected.img,
+            counter: 1,
+          });
+        }
+        totalPrice(carts);
         saveCartsToLocalStorage(carts);
+        cartsCurrent(carts);
       }
 
-      document.addEventListener("DOMContentLoaded", () => {
+      function plusButton(id) {
         const carts = getCartsFromLocalStorage();
-        console.log(carts);
+        const product = carts.find((product) => product.id == id);
+        if (product) {
+          product.counter++;
+          totalPrice(carts);
+          saveCartsToLocalStorage(carts);
+          cartsCurrent(carts);
+        }
+      }
+
+      function minusButton(id) {
+        const carts = getCartsFromLocalStorage();
+        const product = carts.find((product) => product.id == id);
+        if (product && product.counter > 0) {
+          product.counter--;
+          if (product.counter === 0) {
+            const index = carts.indexOf(product);
+            carts.splice(index, 1);
+          }
+          totalPrice(carts);
+          saveCartsToLocalStorage(carts);
+          cartsCurrent(carts);
+        }
+      }
+
+      function totalPrice(carts) {
+        const total = carts.reduce(
+          (acc, product) => acc + product.price * product.counter, 0 
+        );
+        console.log(total);
+        document.getElementById("totalHarga").innerHTML = `${total}`;
+      }
+
+      function cartsCurrent(carts) {
         const current = document.getElementById("current");
         current.innerHTML = getCarts();
+
         function getCarts() {
           return carts
             .map(
@@ -140,9 +177,9 @@
                      <div class="teks">
                          <p>Rp<strong id="price">${product.price}</strong></p>
                            <div class="button-">
-                <button id="plus" class="button plus">+</button>
-                <div id="counter" class="counter">${product.counter}</div>
-                <button id="minus" class="button minus">-</button>
+                            <button id="minus" class="button minus" onclick="minusButton(${product.id})">-</button>
+                            <div id="counter" class="counter">${product.counter}</div>
+                            <button id="plus" class="button plus" onclick="plusButton(${product.id})">+</button>
               </div>
                      </div>
                 </div>
@@ -150,13 +187,8 @@
             )
             .join("");
         }
-      });
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const carts = getCartsFromLocalStorage();
-        const counter = document.getElementById("counter").value;
-        const totalHarga = document.getElementById("totalHarga");
-      });
+        totalPrice(carts);
+      }
 
       function saveCartsToLocalStorage(arg) {
         localStorage.setItem("carts", JSON.stringify(arg));

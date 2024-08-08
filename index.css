@@ -23,6 +23,10 @@ header {
   margin-top: 20px;
 }
 
+.header-teks {
+  margin-bottom: 30px;
+}
+
 .search-label {
   position: relative;
   display: flex;
@@ -59,7 +63,7 @@ header {
 }
 
 .btn > button {
-  padding: 8px 40px;
+  padding: 8px 30px;
   border: none;
   background-color: white;
   border-radius: 8px;
@@ -70,12 +74,16 @@ header {
   color: white;
 }
 
+.button .btn i {
+  font-size: 18px;
+}
+
 .product-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   overflow-y: scroll;
   max-height: 100vh;
+  gap: 20px;
 }
 
 .product-container div p strong {
@@ -86,7 +94,6 @@ header {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 10px;
   width: 28%;
   padding: 10px;
   text-align: left;
@@ -124,6 +131,7 @@ header {
   border-radius: 8px;
   border: none;
   padding: 8px;
+  cursor: pointer;
 }
 
 .product > button:hover {
@@ -140,6 +148,8 @@ body::-webkit-scrollbar {
 
 .conter .order {
   margin-bottom: 30px;
+  overflow-y: scroll;
+  max-height: 40vh;
 }
 
 .conter .order div {
@@ -165,12 +175,12 @@ body::-webkit-scrollbar {
 
 .button.plus {
   background-color: #ffd39b;
-  border-radius: 5px 0 0 5px;
+  border-radius: 0 5px 5px 0;
 }
 
 .button.minus {
   background-color: #ff8c42;
-  border-radius: 0 5px 5px 0;
+  border-radius: 5px 0 0 5px;
 }
 
 .subtotal {
@@ -186,6 +196,25 @@ body::-webkit-scrollbar {
 
 hr {
   border-top: 1px dashed black;
+}
+
+.payment {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.payment button {
+  background-color: #ff731c;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.payment button:hover {
+  border: 2px solid white;
 }
 
 .current {
@@ -225,8 +254,11 @@ hr {
   margin: 0px;
 }
 
-.current-item .teks-title .teks > p, .button- {
-  width: 45%;
+.current-item .teks-title .teks > p,
+.button- {
+  display: flex;
+  gap: 10px;
+  width: 30%;
 }
 
 .current-item .teks-title > h3 {
