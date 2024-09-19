@@ -142,6 +142,10 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .conter {
   padding-right: 10px;
 }
@@ -273,4 +277,8 @@ hr {
 
 .current-item .image > img {
   width: 100%;
+}
+
+.current-item .teks-title .teks > p strong {
+  color: #ff731c;
 }
